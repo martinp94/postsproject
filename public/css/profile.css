@@ -1,0 +1,11 @@
+.profile-info > div {
+	display: grid;
+	grid-template-columns: 20% 60%;
+	grid-gap: 2em;
+	align-items: center;
+	grid-template-rows: 10vh;
+}
+
+.profile-picture form {
+	top: 0;
+}

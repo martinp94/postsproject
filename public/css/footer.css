@@ -1,0 +1,8 @@
+footer {
+	background: #ccc;
+	color: #fff;
+	position: sticky;
+	bottom: 0;
+	width: 100%;
+	min-height: 12vh;
+}

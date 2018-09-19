@@ -1,0 +1,116 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+	background: #eee;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+#app {
+	min-height: 100vh;
+	margin: 0 10%;
+	background: #fff;
+}
+
+button {
+	margin: 1em;
+	border: none;
+	padding: .5em;
+	border-radius: .5em;
+	cursor: pointer;
+}
+
+.btn > a {
+	color: #fff;
+}
+
+.btn-blue {
+	color: #fff;
+	background: #4286f4;
+}
+
+.error-box {
+	width: 12vw;
+	background: #e83e3e;
+	min-height: 5rem;
+	color: #fff;
+	padding: .5rem;
+}
+
+.error-box > ul > li {
+	padding: .5rem;
+	margin-left: 1rem;
+}
+
+.success-box {
+	width: 12vw;
+	background: #25ba27;
+	min-height: 5rem;
+	color: #fff;
+	padding: .5rem;
+}
+
+.container {
+	margin: 1em;
+	padding: 1em;
+	font-size: 16px;
+}
+
+form > .form-row {
+	margin: 1rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+form .form-input {
+	margin: .5em;
+}
+
+form label {
+	min-width: 10%;
+	max-width: 10%;
+}
+
+form input[type='text'], form input[type='number'], form input[type='email'], form input[type='password'], form textarea {
+	border: 1px solid #ccc;
+	text-indent: .2em;
+	padding: .2em;
+}
+
+form input[type='text']:hover, form input[type='number']:hover, form input[type='email']:hover, form input[type='password']:hover{
+	outline-color: #42c5f4;
+}
+
+form input[type='text']:focus, form input[type='number']:focus, form input[type='email']:focus, form input[type='password']:focus{
+	outline-color: #42c5f4;
+	border-radius: 0;
+}
+
+form input[type='submit'] {
+	cursor: pointer;
+}
+
+.header-container {
+	box-sizing: border-box;
+	padding: 1em;
+	width: 100%;
+	color: #fff;
+	background: #42adf4;
+	border: 1px solid #42adf4;
+}
+
+.wrapper-relative {
+	position: relative;
+}
+
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
