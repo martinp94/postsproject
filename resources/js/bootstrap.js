@@ -1,6 +1,7 @@
 
 window._ = require('lodash');
 window.axios = require('axios');
+window.swal = require('sweetalert');
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

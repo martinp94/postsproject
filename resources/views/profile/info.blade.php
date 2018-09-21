@@ -10,18 +10,14 @@
 
 		<div class="profile-picture" style="width: 128;">
 			
-			<div class="wrapper-relative">
+			<div class="wrapper-relative" style="">
+
+				<div id="uploadedContainer" style="top: 0; left: 0; right: 0; visibility: hidden; position: absolute;">
+					
+				</div>
+
 				<img width="128" src="{{ asset("images/uploads/profile/{$user->image}") }}" title="Profile picture" alt="">
-				<form id="image-form" method="POST" enctype="multipart/form-data" style="position: absolute; visibility: hidden;">
-					@csrf
-
-					<label for="image" style="cursor: pointer;">
-						<img width="16" src="{{ asset('svg/edit-icon.png') }}" title="Edit">
-					</label>
-
-					<input id="image" type="file" name="image" style="display: none;">
-
-				</form>
+				
 			</div>
 			
 				
@@ -60,58 +56,110 @@
 
 		</div>
 
-		<br>
+		<br>		
 
 	</div>
 
+
+
 @endsection
 
-
 <script>
+
 	document.addEventListener('DOMContentLoaded', () => { 
 
-	document.querySelector('#edit-name').addEventListener('click', showForm);
-    document.querySelector('#edit-email').addEventListener('click', showForm);
-    document.querySelector('.profile-picture').addEventListener('mouseenter', (e) => {
-    	document.querySelector('#image-form').style.visibility = 'visible';
-    });
-    document.querySelector('.profile-picture').addEventListener('mouseleave', (e) => {
-	   	document.querySelector('#image-form').style.visibility = 'hidden';
-    });
+		document.querySelector('#edit-name').addEventListener('click', showForm);
+	    document.querySelector('#edit-email').addEventListener('click', showForm);
+	    document.querySelector('.profile-picture').addEventListener('mouseenter', mouseEnterHandler);
+	    document.querySelector('.profile-picture').addEventListener('mouseleave', mouseLeaveHandler);
 
-	function showForm(e) {
+	    function mouseEnterHandler(e) {
+	    	document.querySelector('#uploadedContainer').style.visibility = 'visible';
+	    }
 
-    	clearForms();
+	    function mouseLeaveHandler(e) {
+	    	document.querySelector('#uploadedContainer').style.visibility = 'hidden';
+	    }
 
-    	const id = e.target.closest('span').id;
-    	const type = id.substring(id.indexOf('-') + 1);
-    	const token = document.querySelector("meta[name='csrf-token']").content;
-    	const username = document.querySelector("#edit-username").textContent;
+		function showForm(e) {
 
-    	const formInput = type === 'name' ? `<input type="text" name="name" class="form-input" >` : `<input type="email" name="email" class="form-input" >`;
-    	
-    	const markup = `<form action="/profile/${username}/update" method="POST">
+	    	clearForms();
 
-				            <input type="hidden" name="_token" value="${token}">
+	    	const id = e.target.closest('span').id;
+	    	const type = id.substring(id.indexOf('-') + 1);
+	    	const token = document.querySelector("meta[name='csrf-token']").content;
+	    	const username = document.querySelector("#edit-username").textContent;
 
-				            <div class="form-row">
-				            	<label>New ${type}</label>
-				            	${formInput}
-				            </div>
+	    	const formInput = type === 'name' ? `<input type="text" name="name" class="form-input" >` : `<input type="email" name="email" class="form-input" >`;
+	    	
+	    	const markup = `
+							<div class="form-header">
+						        <h1>Edit ${type}</h1>
+						    </div>
 
-				            <button type="submit" class="btn btn-blue">
-				            	Submit
-				            </button>
+    						<form id="edit${type}" class="well" action="/profile/${username}/update" method="POST">
 
-				        </form>`;
+					            <input type="hidden" name="_token" value="${token}">
 
-		document.querySelector('.container').insertAdjacentHTML('beforeend', markup);
-    }
+					            <div class="form-row">
+					            	<label>New ${type}</label>
+					            	${formInput}
+					            </div>
 
-    function clearForms() {
-    	if(document.querySelector('form'))
-    		document.querySelector('form').remove();
-    }
+					            <div class="form-row">
+									<button type="submit" class="btn btn-blue">
+						            	Submit
+						            </button>
+								</div>
+
+					        </form>`;
+
+			document.querySelector('.container').insertAdjacentHTML('beforeend', markup);
+	    }
+
+	    function clearForms() {
+
+	    	if(document.querySelector('#editname')) {
+	    		document.querySelector('#editname').remove();
+	    		document.querySelector('.form-header').remove();
+	    	}
+
+	    	if(document.querySelector('#editemail')) {
+	    		document.querySelector('#editemail').remove();
+	    		document.querySelector('.form-header').remove();
+	    	}
+	    }
+
+	    (() => {
+	    	const eyeCandy = $('#uploadedContainer');
+	    	const croppedOptions = {
+	    		uploadUrl: '/upload',
+	    		cropUrl: '/crop',
+	    		cropData: {
+	    			'width': 128,
+	    			'height': 128,
+	    			'uploadFolder': 'profile'
+	    		},
+	    		uploadData:{
+					'uploadFolder': 'profile'
+				},
+				onAfterImgUpload: function() { 
+					document.querySelector('#uploadedContainer').style.visibility = 'visible';
+					document.querySelector('.profile-picture').removeEventListener('mouseenter', mouseEnterHandler);
+				    document.querySelector('.profile-picture').removeEventListener('mouseleave', mouseLeaveHandler);
+				    document.querySelector('.wrapper-relative > img').style.visibility = 'hidden';
+				},
+				onAfterImgCrop:	function(response) { 
+					document.querySelector('#uploadedContainer').style.visibility = 'hidden';
+					document.querySelector('.profile-picture').addEventListener('mouseenter', mouseEnterHandler);
+				    document.querySelector('.profile-picture').addEventListener('mouseleave', mouseLeaveHandler);
+				    document.querySelector('.wrapper-relative > img').style.visibility = 'visible';
+				    document.querySelector('.wrapper-relative > img').src = response.url;
+				}
+	    	}
+	    	const cropperBox = new Croppic('uploadedContainer', croppedOptions);
+	    	console.log(cropperBox);
+	    })();
 
 }, false);
 </script>

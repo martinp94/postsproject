@@ -9,7 +9,10 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('password.email') }}">
+    <div class="form-header">
+        <h2>Reset password</h2>
+    </div>
+    <form class="well" method="POST" action="{{ route('password.email') }}">
         @csrf
 
         <div class="form-row">
@@ -28,10 +31,14 @@
                 <strong>{{ $errors->first('email') }}</strong>
             </span>
         @endif
+
+        <div class="form-row">
+            <button type="submit" class="btn btn-blue">
+                {{ __('Send Password Reset Link') }}
+            </button>
+        </div>
             
-        <button type="submit" class="btn btn-blue">
-            {{ __('Send Password Reset Link') }}
-        </button>
+        
             
     </form>
                   

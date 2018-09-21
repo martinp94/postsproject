@@ -17,5 +17,7 @@
         "lodash": "^4.17.5",
         "vue": "^2.5.7"
     },
-    "dependencies": {}
+    "dependencies": {
+        "sweetalert": "^2.1.0"
+    }
 }

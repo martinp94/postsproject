@@ -3,7 +3,10 @@
 @section('content')
 
 <div class="container">
-    <form id="registrationForm" method="POST" action="{{ route('register') }}">
+    <div class="form-header">
+        <h2>Registration</h2>
+    </div>
+    <form class="well" id="registrationForm" method="POST" action="{{ route('register') }}">
         @csrf
 
         <div class="form-row">
@@ -40,12 +43,11 @@
             
         </div>
 
+        <div class="form-row">
+            <button type="submit" class="btn btn-blue">{{ __('Register') }}</button>
+        </div>
         
-        <button type="submit" class="btn btn-blue">{{ __('Register') }}</button>
-            
-        
-        
-        
+ 
     </form>
 
     <br>

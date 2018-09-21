@@ -35,6 +35,23 @@ button {
 	background: #4286f4;
 }
 
+.btn-blue:hover {
+	color: #fff;
+	background: #0c65af;
+	transition: 1s;
+}
+
+.btn-green {
+	color: #fff;
+	background: #0caf80;
+}
+
+.btn-green:hover {
+	color: #fff;
+	background: #089169;
+	transition: 1s;
+}
+
 .error-box {
 	width: 12vw;
 	background: #e83e3e;
@@ -62,26 +79,72 @@ button {
 	font-size: 16px;
 }
 
-form > .form-row {
-	margin: 1rem;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+form.well {
+	background: #1a5ecc;
+	margin: auto;
+	width: 30vw;
+	color: #fff;
+	animation: animateFormWell 2s ease;
+
 }
+
+
+form.well input, form.well button, form.well label {
+	animation: animateFormWell 2s ease;
+}
+
+@keyframes animateFormWell {
+	0% {
+		background: #fff;
+		color: #000;
+	}
+
+	100% {
+		background: #1a5ecc;
+		color: #fff;
+	}
+}
+
+form > .form-row {
+	padding: .2em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-sizing: border-box;
+}
+
 
 form .form-input {
 	margin: .5em;
+
 }
 
-form label {
+/*form label {
 	min-width: 10%;
 	max-width: 10%;
+}*/
+
+.form-header {
+	background: #1a5ecc;
+	margin: 0px auto;
+	width: 30vw;
+	color: #fff;
+	text-align: center;
+	padding: 1rem;
+	box-sizing: border-box;
+	animation: animateFormWell 2s ease;
 }
 
 form input[type='text'], form input[type='number'], form input[type='email'], form input[type='password'], form textarea {
 	border: 1px solid #ccc;
 	text-indent: .2em;
-	padding: .2em;
+	padding: .3em;
+	height: 5vh;
+	background: #000;
+	color: #fff;
+	outline: none;
+	border: none;
+	opacity: 0.7;
 }
 
 form input[type='text']:hover, form input[type='number']:hover, form input[type='email']:hover, form input[type='password']:hover{
@@ -95,6 +158,14 @@ form input[type='text']:focus, form input[type='number']:focus, form input[type=
 
 form input[type='submit'] {
 	cursor: pointer;
+}
+
+/*form label {
+	width: 15vw;
+}*/
+
+form input {
+	width: 15vw;
 }
 
 .header-container {

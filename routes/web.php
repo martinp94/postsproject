@@ -23,3 +23,8 @@ Route::get('admin/routes', 'HomeController@admin')->middleware('admin');
 Route::get('profile/{username}', 'UsersController@index')->name('profile.info')->middleware('verified');
 
 Route::post('/profile/{username}/update', 'UsersController@update')->name('profile.update');
+
+// IMAGE CROP
+
+Route::post('/upload', 'CropController@postUpload');
+Route::post('/crop', 'CropController@postCrop');

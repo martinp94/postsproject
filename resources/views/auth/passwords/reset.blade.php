@@ -3,14 +3,21 @@
 @section('content')
 <div class="container">
     
-    <form method="POST" action="{{ route('password.update') }}">
+    <div class="form-header">
+        <h2>Reset password</h2>
+    </div>
+    <form class="well" method="POST" action="{{ route('password.update') }}">
         @csrf
 
         <input type="hidden" name="token" value="{{ $token }}">
 
         <div class="form-row">
 
-            <input type="email" name="email" value="{{ auth()->user()->email }}" required hidden>
+            @auth
+                <input class="form-input" type="email" name="email" value="{{ auth()->user()->email }}" readonly="readonly">
+            @else
+                <input class="form-input" type="email" name="email" required>
+            @endauth
 
             @if ($errors->has('email'))
                 <span>
@@ -41,9 +48,12 @@
             <input type="password" class="form-input" name="password_confirmation" required>
         </div>
 
-        <button type="submit" class="btn btn-blue">
-            {{ __('Reset Password') }}
-        </button>
+        <div class="form-row">
+            <button type="submit" class="btn btn-blue">
+                {{ __('Reset Password') }}
+            </button>
+        </div>
+        
            
         
     </form>
