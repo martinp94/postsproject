@@ -1,0 +1,93 @@
+article.post {
+	border: 1px solid black;
+	min-height: 60vh;
+}
+
+article.post > div {
+	margin: 1em;
+}
+
+article.post h3 {
+	display: inline;
+}
+
+article.post > .post-info {
+	display: flex;
+}
+
+article.post > .post-info > div {
+	margin: 0 1vw;
+}
+
+
+.post-heading {
+
+}
+
+.post-heading > h1 {
+	
+}
+
+.post-create-area {
+	border: 1px solid black;
+	min-height: 60vh;
+	margin: 0 auto;
+}
+
+.post-create-area > div {
+	margin: 1em;
+}
+
+.post-create-area label {
+	
+	opacity: 0.5;
+	font-size: 22px;
+}
+
+.flex-wrapper {
+	width: 30%;
+	display: flex;
+}
+
+.flex-wrapper > label {
+	flex: 1;
+}
+
+
+.post-create-area input[type="text"] {
+	padding: .2em;
+	border: none;
+	font-size: 22px;
+	opacity: 0.4;
+}
+
+.post-create-area textarea {
+	padding: .2em;
+	border: none;
+	opacity: 0.4;
+}
+
+.post-create-area input[type="text"]:focus, .post-create-area textarea:focus {
+	outline: 0;
+	opacity: 1;
+}
+
+.post-create-errors {
+	width: 30%;
+	padding: 1em;
+}
+
+.post-create-errors > ul {
+	list-style-position: inside;
+	list-style-type: none;
+	list-style-image: url('/svg/error.png');
+}
+
+.post-create-errors li {
+	padding: 1em;
+}
+
+
+
+
+

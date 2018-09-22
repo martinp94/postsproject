@@ -12,8 +12,17 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
+    <script src="{{ asset('js/navigation.js') }}"></script>
+    
+    <!-- Croppic plugin -->
     <script src="{{ asset('plugins/croppic/croppic.js') }}"></script>
+
+    <!-- Include the SCEditors JS -->
+    <script src="{{ asset('plugins/sceditor/minified/sceditor.min.js') }}"></script>
+
+    <!-- Include the BBCode or XHTML formats for SCEditor -->
+    <script src="{{ asset('plugins/sceditor/minified/formats/bbcode.js') }}"></script>
+    <script src="{{ asset('plugins/sceditor/minified/formats/xhtml.js') }}"></script>
 
 
     <!-- Fonts -->
@@ -26,11 +35,15 @@
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navigation.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/posts.css') }}" rel="stylesheet">
 
-    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/> --}}
-
+    
+    <!-- Croppic plugin CSS -->
     <link href="{{ asset('plugins/croppic/assets/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/croppic/assets/css/croppic.css') }}" rel="stylesheet">
+
+    <!-- Include the default theme for SCEditor -->
+    <link href="{{ asset('plugins/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
     
 </head>
 
@@ -46,5 +59,7 @@
         @include ('partials.footer')
 
     </div>
+
+    @yield('scripts')
 </body>
 </html>

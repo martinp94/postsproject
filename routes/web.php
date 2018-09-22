@@ -28,3 +28,7 @@ Route::post('/profile/{username}/update', 'UsersController@update')->name('profi
 
 Route::post('/upload', 'CropController@postUpload');
 Route::post('/crop', 'CropController@postCrop');
+
+// POSTS
+
+Route::post('/posts/store', 'PostsController@store')->name('posts.store');
