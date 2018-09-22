@@ -32,15 +32,17 @@ class CropController extends Controller
         $photo = $form_data['img'];
 
         $original_name = $photo->getClientOriginalName();
+        $extension = $photo->getClientOriginalExtension();
+
         $original_name_without_ext = substr($original_name, 0, strlen($original_name) - 4);
 
         $filename = $this->sanitize($original_name_without_ext);
-        $allowed_filename = $this->createUniqueFilename( $filename, $form_data['uploadFolder'] );
+        $allowed_filename = $this->createUniqueFilename( $filename, $form_data['uploadFolder'], $extension );
 
-        $filename_ext = $allowed_filename .'.jpg';
+        $filename_ext = $allowed_filename . '.' . $extension;
 
         $manager = new ImageManager();
-        $image = $manager->make( $photo )->encode('jpg')->save(env('UPLOAD_PATH') . "/{$form_data['uploadFolder']}/" . $filename_ext );
+        $image = $manager->make( $photo )->encode($extension)->save(env('UPLOAD_PATH') . "/{$form_data['uploadFolder']}/" . $filename_ext );
 
         if( !$image) {
 
@@ -131,10 +133,10 @@ class CropController extends Controller
     }
 
 
-    private function createUniqueFilename( $filename, $uploadFolder )
+    private function createUniqueFilename( $filename, $uploadFolder, $extension )
     {
         $upload_path = env('UPLOAD_PATH');
-        $full_image_path = $upload_path . "{$uploadFolder}/" . $filename . '.jpg';
+        $full_image_path = $upload_path . "{$uploadFolder}/" . $filename . '.' . $extension;
 
         if ( File::exists( $full_image_path ) )
         {
