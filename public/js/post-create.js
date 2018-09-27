@@ -1,31 +1,4 @@
-const eventHandlers = {
-	postTitleKeyUpHandler: function(e) {
-		const targetElement = e.target;
 
-		// Change case to uppercase for first character
-		let title = targetElement.value;
-		title = title[0].toUpperCase() + title.slice(1);
-
-		// display formatted title to DOM
-		targetElement.value = title;
-
-		// store title to postData
-		postData.title = title;
-	},
-	postBodyKeyUpHandler: function(e) {
-		const body = e.target.innerHTML;
-		postData.body = body;
-	},
-	postTagsKeyUpHandler: function(e) {
-		if(e.keyCode === 32 || e.type === 'blur') {
-			const tags = e.target.value.split(' ').filter(tag => tag !== '');
-			postData.tags = tags;
-		}
-	},
-	submitPost: function(e) {
-		sendPostData();
-	}
-};
 
 sceditor.instance(textarea).keyUp(eventHandlers.postBodyKeyUpHandler);
 

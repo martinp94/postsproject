@@ -1,17 +1,32 @@
 article.post {
-	border: 1px solid black;
-	min-height: 60vh;
+	/*border: 1px solid black;*/
+	min-height: 10vh;
+	margin-top: 1em;
 }
 
 article.post > div {
 	margin: 1em;
 }
 
+article.post > div > div {
+	display: flex;
+	align-items: center;
+}
+
+article.post > div > div > span {
+	flex: 1 0 0;
+}
+
+article.post > div > div > h3 {
+	flex: 9 0 0;
+	margin-left: .4vw;
+}
+
 article.post h3 {
 	display: inline;
 }
 
-article.post > .post-info {
+article.post > .post-info, article.post > .post-actions {
 	display: flex;
 }
 
@@ -29,7 +44,7 @@ article.post > .post-info > div {
 }
 
 .post-create-area {
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 	min-height: 60vh;
 	margin: 0 auto;
 }
@@ -87,7 +102,60 @@ article.post > .post-info > div {
 	padding: 1em;
 }
 
+.post-actions-like {
+	height: 32px;
+   	width: 32px;
+	background: url('/svg/like-option.png');
+}
 
+.post-actions-like:hover {
+	cursor: pointer;
+	background: url('/svg/like-option-hover.png');
+}
 
+.post-actions-dislike {
+	height: 32px;
+   	width: 32px;
+	background: url('/svg/dislike-option.png');
+	margin-left: 2vw;
+}
+
+.post-actions-dislike:hover {
+	cursor: pointer;
+	background: url('/svg/dislike-option-hover.png');
+}
+
+.post-actions-comment {
+	height: 32px;
+   	width: 32px;
+	background: url('/svg/comment-option.png');
+	margin-left: 4vw;
+}
+
+.post-actions-comment:hover {
+	cursor: pointer;
+	background: url('/svg/comment-option-hover.png');
+}
+
+.post-actions-like-disabled {
+	height: 32px;
+   	width: 32px;
+	background: url('/svg/like-option.png');
+}
+
+.post-actions-like-disabled:hover {
+	cursor: not-allowed;
+}
+
+.post-actions-dislike-disabled {
+	height: 32px;
+   	width: 32px;
+	background: url('/svg/dislike-option.png');
+	margin-left: 2vw;
+}
+
+.post-actions-dislike-disabled:hover {
+	cursor: not-allowed;
+}
 
 

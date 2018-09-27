@@ -1,50 +1,71 @@
-<article class="post">
+<article class="post" id="post{{ $post->id }}">
 
-		<div class="post-heading">
-			<h1>Naslov</h1>
+	<div class="post-heading">
+		<h1>{{ $post->title }}</h1>
+	</div>
+
+	<div class="post-info">
+		<div class="post-author">
+			<span><img width="18" src="{{ asset('svg/author.png') }}" title="author"></span> <h3>{{ $post->author->name }}</h3>
 		</div>
 
-		<div class="post-info">
-			<div class="post-author">
-				<span>by</span> <h3>Martin Popović</h3>
-			</div>
-
-			<div class="post-date">
-				<span>date</span> <h3>12/Mar/2017</h3>
-			</div>
-
-			<div class="post-comments">
-				<span>comments</span> <h3>45</h3>
-			</div>
-
-			<div class="post-likes">
-				<span>likes</span> <h3>18</h3>
-			</div>
+		<div class="post-date">
+			<span><img width="16" src="{{ asset('svg/date.png') }}" title="date"></span> <h3>{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</h3>
 		</div>
-
-		<hr>
-
-		<div class="post-body">
-			<p>
-				Sed dolor ut excepteur sit qui labore occaecat deserunt ut elit ut veniam commodo aute veniam ex dolore exercitation aute ea reprehenderit amet quis in enim occaecat tempor do esse deserunt qui ad dolor ad magna tempor eiusmod est excepteur aliquip mollit officia id commodo esse esse proident qui eiusmod dolor consequat aliquip cupidatat eiusmod dolore velit occaecat non sit voluptate veniam veniam tempor proident ea qui laboris consectetur sed officia sed commodo non duis nisi exercitation officia quis consequat reprehenderit labore eu ut aute eu excepteur sed eiusmod reprehenderit voluptate elit laboris in magna ut ut sint nulla nulla nostrud sint non excepteur id ad pariatur commodo veniam cillum veniam est aliqua commodo esse aute sint qui dolor cillum commodo nostrud adipisicing dolor esse est ad in ut aliquip aute culpa aliquip culpa est ea adipisicing adipisicing est cillum quis in incididunt enim minim nostrud esse ea quis pariatur ullamco voluptate eu adipisicing sit occaecat minim ullamco nulla commodo ut exercitation ut esse occaecat adipisicing non incididunt aute nisi dolor ea sunt ex qui cillum sit nulla laborum eiusmod laboris minim eu ex magna consequat cillum sit aliquip cupidatat tempor nostrud esse eu voluptate aliquip dolore velit fugiat ut consectetur adipisicing ea ut exercitation quis dolore fugiat id dolor nisi officia non fugiat in occaecat dolor cupidatat veniam in ut id proident laborum est eiusmod amet culpa officia id in mollit aliqua deserunt deserunt aliquip elit est duis in cillum dolor sit est tempor eu commodo in eu consectetur culpa voluptate ut ut.
-
-				Sed dolor ut excepteur sit qui labore occaecat deserunt ut elit ut veniam commodo aute veniam ex dolore exercitation aute ea reprehenderit amet quis in enim occaecat tempor do esse deserunt qui ad dolor ad magna tempor eiusmod est excepteur aliquip mollit officia id commodo esse esse proident qui eiusmod dolor consequat aliquip cupidatat eiusmod dolore velit occaecat non sit voluptate veniam veniam tempor proident ea qui laboris consectetur sed officia sed commodo non duis nisi exercitation officia quis consequat reprehenderit labore eu ut aute eu excepteur sed eiusmod reprehenderit voluptate elit laboris in magna ut ut sint nulla nulla nostrud sint non excepteur id ad pariatur commodo veniam cillum veniam est aliqua commodo esse aute sint qui dolor cillum commodo nostrud adipisicing dolor esse est ad in ut aliquip aute culpa aliquip culpa est ea adipisicing adipisicing est cillum quis in incididunt enim minim nostrud esse ea quis pariatur ullamco voluptate eu adipisicing sit occaecat minim ullamco nulla commodo ut exercitation ut esse occaecat adipisicing non incididunt aute nisi dolor ea sunt ex qui cillum sit nulla laborum eiusmod laboris minim eu ex magna consequat cillum sit aliquip cupidatat tempor nostrud esse eu voluptate aliquip dolore velit fugiat ut consectetur adipisicing ea ut exercitation quis dolore fugiat id dolor nisi officia non fugiat in occaecat dolor cupidatat veniam in ut id proident laborum est eiusmod amet culpa officia id in mollit aliqua deserunt deserunt aliquip elit est duis in cillum dolor sit est tempor eu commodo in eu consectetur culpa voluptate ut ut.
-			</p>
-		</div>
-		
-
-		<div class="post-like-button">
-			<span>Like</span>
-		</div>
-
 
 		<div class="post-comments">
-			@yield ('comments')
+			<span><img width="20" src="{{ asset('svg/comments.png') }}" title="comments"></span> <h3>0</h3>
 		</div>
 
-		
+		<div class="post-likes">
+			<span><img width="16" src="{{ asset('svg/likes.png') }}" title="likes"></span> <h3 style="color: green;">{{ App\Post::find($post->id)->votes->where('type', '=', 1)->count() }}</h3>
+		</div>
+
+		<div class="post-dislikes">
+			<span><img width="16" src="{{ asset('svg/dislikes.png') }}" title="dislikes"></span> <h3 style="color: darkred;">{{ App\Post::find($post->id)->votes->where('type', '=', 0)->count() }}</h3>
+		</div>
+	</div>
+
+	<div class="post-body">
+		<p>
+			{!! $post->body !!}
+		</p>
+	</div>
+	
+
+	<div class="post-actions">
+
+		@if(!Auth::user()->votes->where('post_id', '=', $post->id)->count())
+
+			<div class="post-actions-like">
+				
+			</div>
+
+			<div class="post-actions-dislike">
+				
+			</div>
+
+		@else
+
+			<div class="post-actions-like-disabled" title="You already voted">
+				
+			</div>
+
+			<div class="post-actions-dislike-disabled" title="You already voted">
+				
+			</div>
+
+		@endif
+
+		<div class="post-actions-comment">
+
+		</div>
+
+	</div>
 
 
+	<div class="post-comments">
+		@yield ('comments')
+	</div>
 
-
-	</article>
+</article>

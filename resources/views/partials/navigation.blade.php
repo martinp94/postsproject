@@ -30,7 +30,7 @@
             
 
             <div class="profile-image">
-                <img width="26" src="{{ asset('/images/uploads/profile') . '/' . Auth::user()->image }}" alt="arrow">
+                <img width="26" src="{{ asset('/images/uploads/profile') . '/' . Auth::user()->image }}" alt="">
             </div>
             
             <span class="menu-arrow">

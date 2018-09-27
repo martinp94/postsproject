@@ -1,7 +1,5 @@
 <div class="container">
 
-	
-	
 	<div class="post-create-area">
 
 		<div class="post-create-title flex-wrapper">
@@ -11,7 +9,7 @@
 
 		<div class="post-create-tags flex-wrapper">
 			<label for="post-tags">Tags</label>
-			<textarea id="post-tags-textarea" style="resize: none;" cols="43" rows="5"></textarea>
+			<textarea id="post-tags-textarea" style="resize: none;" cols="40" rows="5"></textarea>
 		</div>
 
 		<div class="post-create-body">
@@ -28,9 +26,7 @@
 			<ul>
 				
 			</ul>
-		</div>
-
-		
+		</div>	
 
 	</div>
 

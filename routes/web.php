@@ -32,3 +32,7 @@ Route::post('/crop', 'CropController@postCrop');
 // POSTS
 
 Route::post('/posts/store', 'PostsController@store')->name('posts.store');
+
+// VOTES
+
+Route::post('/posts/vote', 'VotesController@store')->name('posts.vote');
