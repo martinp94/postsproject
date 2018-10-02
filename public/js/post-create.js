@@ -16,7 +16,7 @@ const postData = {
 	_token: document.querySelector('meta[name="csrf-token"]').content
 };
 
-const validation = {
+const helpers = {
 	displayValidationErrors: function(errors) {
 		const errorDiv = document.querySelector(".post-create-errors");
 		this.clearValidationErrors();
@@ -49,6 +49,11 @@ const validation = {
 	clearSuccessMessage: function() {
 		if(document.querySelector(".success-box"))
 			document.querySelector(".success-box").remove();
+	},
+	clearCommentArea: function(postId) {
+		const commentArea = document.querySelector(`#post${postId}`).querySelector('.post-create-comment');
+		commentArea.classList.remove('show');
+		commentArea.classList.add('hide');
 	}
 };
 
@@ -63,13 +68,36 @@ function sendPostData() {
     )
 	.then(function (response) {
 		console.log(response);
-		validation.clearValidationErrors();
-		validation.displaySuccess();
+		helpers.clearValidationErrors();
+		helpers.displaySuccess();
 		clearForm();
 
 	})
 	.catch(function (error) {
 		const errors = error.response.data.errors;
-		validation.displayValidationErrors(errors);
+		helpers.displayValidationErrors(errors);
+	});
+}
+
+function sendCommentData(postId, body) {
+
+	const commentData = {
+		post_id: postId,
+		body: body,
+		_token: document.querySelector('meta[name="csrf-token"]').content
+	};
+
+	console.log(commentData);
+
+	axios.post('/posts/storeComment', commentData
+    )
+	.then(function (response) {
+		console.log(response);
+		helpers.clearCommentArea(postId);
+
+	})
+	.catch(function (error) {
+		const errors = error.response.data.errors;
+		sweetAlert(errors.body[0]);
 	});
 }

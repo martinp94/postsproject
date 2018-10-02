@@ -2,10 +2,35 @@ article.post {
 	/*border: 1px solid black;*/
 	min-height: 10vh;
 	margin-top: 1em;
+	background: #fff;
+	padding: 1em;
+}
+
+article.post.comment {
+	/*border: .1em solid black;*/
+	min-height: 3vh;
+	margin: 2em 5em;
+	background: #fff;
+	padding: 2em;
+	width: 35vw;
+}
+
+article.post.reply {
+	/*border: .1em solid black;*/
+	min-height: 3vh;
+	margin: 2em auto;
+	background: #fff;
+	padding: 2em;
+	width: 25vw;
 }
 
 article.post > div {
 	margin: 1em;
+}
+
+article.post > .post-body {
+	min-height: 11vh;
+	padding: 1em;
 }
 
 article.post > div > div {
@@ -34,6 +59,13 @@ article.post > .post-info > div {
 	margin: 0 1vw;
 }
 
+.hide {
+	display: none;
+}
+
+.show {
+	display: inline-block;
+}
 
 .post-heading {
 

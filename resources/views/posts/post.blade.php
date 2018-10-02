@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="post-comments">
-			<span><img width="20" src="{{ asset('svg/comments.png') }}" title="comments"></span> <h3>0</h3>
+			<span><img width="20" src="{{ asset('svg/comments.png') }}" title="comments"></span> <h3>{{ $post->comments->count() }}</h3>
 		</div>
 
 		<div class="post-likes">
@@ -26,12 +26,13 @@
 		</div>
 	</div>
 
+	<hr style="margin: 1em;">
+
 	<div class="post-body">
 		<p>
 			{!! $post->body !!}
 		</p>
 	</div>
-	
 
 	<div class="post-actions">
 
@@ -63,9 +64,25 @@
 
 	</div>
 
+	<div class="post-create-comment hide">
+		<textarea id='comment{{ $post->id }}' class="create-comment-textarea" style="width: 40vw; height: 15vh;"></textarea>
+		<button class="create-comment-submit btn btn-blue" style="float: right;">Submit</button>
+	</div>
 
 	<div class="post-comments">
-		@yield ('comments')
+		@include ('posts.comments')
 	</div>
 
 </article>
+
+	
+<script>
+	sceditor.create(document.querySelector("#post" + {{$post->id}} + " textarea.create-comment-textarea"), {
+		format: 'bbcode',
+		resizeEnabled: false,
+		style: 'plugins/sceditor/minified/themes/content/default.min.css',
+		emoticonsRoot: 'plugins/sceditor/'
+	});
+
+	sceditor.instance(document.querySelector("#post" + {{$post->id}} + " textarea.create-comment-textarea")).keyUp(eventHandlers.commentKeyUpHandler({{ $post->id }}), false);
+</script>

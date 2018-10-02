@@ -17,7 +17,7 @@ class PostRepository implements PostRepositoryInterface
 
 	public function all() 
 	{
-        return $this->model->orderBy('updated_at', 'desc')->get();
+        return $this->model->whereNull('reply_to')->orderBy('updated_at', 'desc')->get();
 	}
 
     public function create(array $data) 

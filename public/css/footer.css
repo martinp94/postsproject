@@ -5,4 +5,5 @@ footer {
 	bottom: 0;
 	width: 100%;
 	min-height: 12vh;
+	z-index: 50;
 }

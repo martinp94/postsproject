@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\CommentCreateRequest;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,10 +39,6 @@ class PostsController extends Controller
      */
     public function store(PostCreateRequest $request)
     {
-        /*return response()->json(['title' => $request->title,
-        'body' => $request->body,
-        'tags' => implode(' ', $request->tags),
-        'user_id' => Auth::user()->id]);*/
         try {
 
             Post::create([
@@ -53,8 +50,20 @@ class PostsController extends Controller
         } catch (\Illuminate\Database\QueryException $exception) {
             return response()->json($exception->errorInfo);
         }
-       
+    }
 
+    public function storeComment(CommentCreateRequest $request)
+    {
+        try {
+
+            Post::create([
+                'body' => $request->body,
+                'reply_to' => $request->post_id,
+                'user_id' => Auth::user()->id
+           ]);
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return response()->json($exception->errorInfo);
+        }
     }
 
     /**

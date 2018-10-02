@@ -33,45 +33,31 @@ const eventHandlers = {
 		const postId = e.target.closest('.post').id.substr(4);
 		sendVote(postId, 'dislike');
 	},
-	commentHandler: function(e) {
+	commentActionHandler: function(e) {
+
+		const createCommentDiv = e.target.closest('article').querySelector('.post-create-comment');
+		if(createCommentDiv.classList.contains('hide')) {
+			createCommentDiv.classList.remove('hide');
+			createCommentDiv.classList.add('show');
+		}else {
+			createCommentDiv.classList.remove('show');
+			createCommentDiv.classList.add('hide');
+		}
+	},
+	commentKeyUpHandler: function(postId) {
+		return function(event) {
+			createdComments[postId] = event.target.innerHTML;
+			console.log(createdComments);
+		}
+		
+	},
+	submitComment: function(e) {
 		const postId = e.target.closest('.post').id.substr(4);
+		sendCommentData(postId, createdComments[postId]);
+	},
+	submitReply: function(e) {
+		const postId = e.target.closest('.post').id.substr(4);
+		const toPostId = e.target.closest('.post').parentNode.closest('.post').id.substr(4);
+		sendCommentData(toPostId, createdComments[postId]);
 	}
 };
-
-function sendVote(postId, type) {
-	const url = `/posts/vote`;
-
-	axios.post(url, {
-		post: postId,
-		type: type
-	}
-    )
-	.then(function (response) {
-		
-		const postArticle = document.querySelector(`#post${postId}`);
-
-		// remove like and dislike buttons 
-		postArticle.querySelector('.post-actions-like').remove();
-		postArticle.querySelector('.post-actions-dislike').remove();
-
-		// render disabled buttons
-		const markup = `<div class="post-actions-like-disabled" title="You already voted">
-				
-			</div>
-
-			<div class="post-actions-dislike-disabled" title="You already voted">
-				
-			</div>`;
-
-		postArticle.querySelector('.post-actions').insertAdjacentHTML('afterbegin', markup);
-
-		// increase votes
-
-		postArticle.querySelector(`.post-${type}s h3`).textContent = parseInt(postArticle.querySelector(`.post-${type}s h3`).textContent) + 1;
-
-
-	})
-	.catch(function (error) {
-		sweetAlert(error + '');
-	});
-}
